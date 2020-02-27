@@ -1,0 +1,112 @@
+<html>
+<head>
+	<title>QuickPick</title>
+</head>
+<body>
+	<form>
+		5 Guesses <input type='text' class='Guesses'><br><br>
+		Lucky Ball <input type= 'number' id= 'Guessball'><br><br>
+		<input type ='button' value = "Submit" onclick = "Lottery()">
+	</form>
+	<script language= "javascript">
+		function Lottery(){
+			num1 = Math.ceil(Math.random()*48);
+			num2 = Math.ceil(Math.random()*48);
+			num3 = Math.ceil(Math.random()*48);
+			num4 = Math.ceil(Math.random()*48);
+			num5 = Math.ceil(Math.random()*48);
+			ball = Math.ceil(Math.random()*18);
+			var rand_numbers = [num1, num2, num3, num4, num5];
+			var Guesses=document.getElementsByClassName("Guesses")[0].value;
+			var Guessball=document.getElementById("Guessball").value;
+			var UserGuesses=Guesses.split(" ");
+			UserGuesses.sort();
+			var foundg=[false, false, false, false, false];
+			var foundr=[false, false, false, false, false];
+			var num_found = 0;
+			var lucky = false;
+			for (i = 0; i < 5; i++){
+				for (j = 0; j < 5; j++){
+					if (rand_numbers[i] == UserGuesses[j]){
+						if ((!foundr[i]) && (!foundg[j])){
+							foundr[i] = true;
+							foundg[j]= true;
+							num_found++;
+						}
+					}
+				}
+			}
+			if (ball == Guessball){
+				lucky = true;
+			}
+			document.write("5 Guesses <br>");
+			for (i = 0; i < UserGuesses.length; i++){
+				document.write(UserGuesses[i], "<br>");
+			}
+			document.write("<br>Luckyball guess<br>", Guessball);
+			document.write("<br><br><br>5 Numbers<br>");
+			for (i = 0; i < rand_numbers.length; i++){
+				document.write(rand_numbers[i], "<br>");
+			}
+			document.write("<br>Luckyball<br>", ball, "<br><br>");
+			document.write("Matches: ", num_found, "<br>");
+			if (lucky){
+				document.write("Lucky Ball: Correct<br>");
+			}
+			else{
+				document.write("Lucky Ball: Incorrect<br>");
+			}
+			if (num_found == 0){
+				if (lucky){
+					document.write("You won 4 dollars<br>");
+				}
+				else{
+					document.write("Better luck next time!<br>")
+				}
+			}
+			else if (num_found == 1){
+				if (lucky){
+					document.write("You won 6 dollars<br>");
+				}
+				else{
+					document.write("Better luck next time!<br>");
+				}
+			}
+			else if (num_found == 2){
+				if (lucky){
+					document.write("You won 25 dollars<br>");
+				}
+				else{
+					document.write("You won 3 dollars<br>");
+				}
+			}
+			else if (num_found == 3){
+				if (lucky){
+					document.write("You won 150 dollars<br>");
+				}
+				else{
+					document.write("You won 20 dollars<br>");
+				}
+			}
+			else if (num_found == 4){
+				if (lucky){
+					document.write("You won 5000 dollars<br>");
+				}
+				else{
+					document.write("You won 200 dollars<br>");
+				}
+			}
+			else if (num_found == 5){
+				if (lucky){
+					document.write("You won 7000 dollars a week for life!<br>");
+				}
+				else{
+					document.write("You won 25,000 dollars a year for life!<br>");
+				}
+			}
+		}
+	</script>
+</body>
+</html>
+
+
